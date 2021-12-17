@@ -1,0 +1,57 @@
+service: demo-js
+# frameworkVersion: '3'
+provider:
+  name: aws
+  lambdaHashingVersion: 20201221
+  region: ap-southeast-1
+  memorySize: 128
+  timeout: 28
+  versionFunctions: false
+  
+plugins:
+  - serverless-offline
+  # - serverless-rust
+
+package:
+  exclude:
+    - node_modules/**
+    - target/**
+
+functions:
+  hellojs:
+    handler: handlerjs.hello
+    runtime: nodejs12.x
+    events:
+      - httpApi:
+          path: /js
+          method: get
+  # hellopy:
+  #   handler: handlerpy.hello
+  #   runtime: python3.8
+  #   events:
+  #     - httpApi:
+  #         path: /py
+  #         method: get
+  # hellowasm:
+  #   handler: pkg/handlerwasm.hello
+  #   runtime: nodejs12.x
+  #   events:
+  #     - httpApi:
+  #         path: /wasm
+  #         method: get
+  # hellors:
+  #   handler: handlerwasm
+  #   runtime: rust
+  #   events:
+  #     - httpApi:
+  #         path: /rs
+  #         method: get
+
+# custom:
+#   # this section allows for customization of the default
+#   # serverless-rust plugin settings
+#   rust:
+#     # flags passed to cargo
+# #    cargoFlags: '--features enable-awesome'
+#     # experimental! when set to true, artifacts are built locally outside of docker
+#     dockerless: true

@@ -1,0 +1,5 @@
+.serverless
+node_modules
+pkg
+target
+__pycache__
